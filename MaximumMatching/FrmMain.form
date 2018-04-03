@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="FrmMain">
+  <grid id="cbd77" binding="contentPane" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="48" y="54" width="871" height="300"/>
+    </constraints>
+    <properties>
+      <minimumSize width="650" height="300"/>
+      <preferredSize width="650" height="300"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="8e9dc" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="a3017" class="javax.swing.JButton" binding="loadDictButton" default-binding="true">
+            <constraints border-constraint="East"/>
+            <properties>
+              <text value="loadDict"/>
+            </properties>
+          </component>
+          <component id="f47ba" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+            <constraints border-constraint="Center"/>
+            <properties/>
+          </component>
+          <component id="d094a" class="javax.swing.JLabel">
+            <constraints border-constraint="West"/>
+            <properties>
+              <text value="currentDict:"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="ef1cf" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="8e5b6" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <dragEnabled value="false"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="5a11" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="a1e15" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+            <constraints border-constraint="Center"/>
+            <properties/>
+          </component>
+          <grid id="df504" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="South"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="de451" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints border-constraint="North"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="eff85" class="javax.swing.JButton" binding="mmButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="mm"/>
+                    </properties>
+                  </component>
+                  <component id="2e2a" class="javax.swing.JButton" binding="rmmButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="rmm"/>
+                    </properties>
+                  </component>
+                  <component id="f7eeb" class="javax.swing.JButton" binding="bmmButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="bmm"/>
+                    </properties>
+                  </component>
+                  <component id="ed03b" class="javax.swing.JLabel">
+                    <constraints/>
+                    <properties>
+                      <text value="customMaximumWordLength"/>
+                    </properties>
+                  </component>
+                  <component id="a9574" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="100" height="25"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="e6f2b" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints border-constraint="South"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="5388e" class="javax.swing.JCheckBox" binding="singleStepDebugCheckBox" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="singleStepDebug"/>
+                    </properties>
+                  </component>
+                  <component id="73dd6" class="javax.swing.JCheckBox" binding="displayLookupFailureCheckBox" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="displayLookupFailure"/>
+                    </properties>
+                  </component>
+                  <component id="2e9cc" class="javax.swing.JCheckBox" binding="displayMatchingFailureCheckBox" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="displayMatchingFailure"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="73f19" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="d7d2e" class="javax.swing.JCheckBox" binding="displayDecisionLogCheckBox" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="displayDecisionLog"/>
+                    </properties>
+                  </component>
+                  <component id="6b350" class="javax.swing.JCheckBox" binding="displayBothMatchingResultCheckBox" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="displayBothMatchingResult"/>
+                    </properties>
+                  </component>
+                  <component id="cf8db" class="javax.swing.JCheckBox" binding="defaultRMMResultCheckBox" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <text value="defaultRMMResult"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
