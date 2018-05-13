@@ -1,10 +1,14 @@
 package sentenceparser;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -63,7 +67,6 @@ public class SentenceParser {
                                     || newProb > score.get(scorePointer1).getProbability()) {
                                 // modify the score array.
                                 newRule.setProbability(newProb);
-                                System.out.println("new prob for rule " + newRule);
                                 score.putIfAbsent(scorePointer1, null);
                                 score.put(scorePointer1, newRule);
                                 back.putIfAbsent(scorePointer1, new Pair[1]);
@@ -150,73 +153,9 @@ public class SentenceParser {
             }
         }
         
-        for(int i = 0; i < tokenizedString.size(); i++) {
-            for(int j = i+1; j <= tokenizedString.size(); j++) {
-                for(Token lhs : nonterminalSet) {
-                    Pair3<Integer, Integer, Token> pointer = new Pair3<>(i, j, lhs);
-                    if(score.get(pointer) != null) {
-                        System.out.println(i + " " + j + " " + score.get(pointer));
-                    }
-                }
-            }
-        }
         
         // building the tree from score[0][tokenizedString.size()];
         return buildTree(nonterminalSet, score, back, tokenizedString);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // tokens.
-        Token S = new Token("S", false);
-        Token VP = new Token("VP", false);
-        Token atVP_V = new Token("@VP_V", false);
-        Token NP = new Token("NP", false);
-        Token P = new Token("P", false);
-        Token PP = new Token("PP", false);
-        Token N = new Token("N", false);
-        Token V = new Token("V", false);
-        Token people = new Token("people", true);
-        Token fish = new Token("fish", true);
-        Token tanks = new Token("tanks", true);
-        Token roads = new Token("roads", true);
-        Token with = new Token("with", true);
-        
-        // rules.
-        Rule[] rules = new Rule[19];
-        Token[] rhs1 = {NP, VP}; rules[0] = new Rule(S, rhs1, 0.9);
-        Token[] rhs2 = {VP}; rules[1] = new Rule(S, rhs2, 0.1);
-        Token[] rhs3 = {V, NP}; rules[2] = new Rule(VP, rhs3, 0.5);
-        Token[] rhs4 = {V}; rules[3] = new Rule(VP, rhs4, 0.1);
-        Token[] rhs5 = {V, atVP_V}; rules[4] = new Rule(VP, rhs5, 0.3);
-        Token[] rhs6 = {V, PP}; rules[5] = new Rule(VP, rhs6, 0.1);
-        Token[] rhs7 = {NP, PP}; rules[6] = new Rule(atVP_V, rhs7, 1.0);
-        Token[] rhs8 = {NP, NP}; rules[7] = new Rule(NP, rhs8, 0.1);
-        Token[] rhs9 = {NP, PP}; rules[8] = new Rule(NP, rhs9, 0.2);
-        Token[] rhs10 = {N}; rules[9] = new Rule(NP, rhs10, 0.7);
-        Token[] rhs11 = {P, NP}; rules[10] = new Rule(PP, rhs11, 1.0);
-        Token[] rhs12 = {people}; rules[11] = new Rule(N, rhs12, 0.5);
-        Token[] rhs13 = {fish}; rules[12] = new Rule(N, rhs13, 0.2);
-        Token[] rhs14 = {tanks}; rules[13] = new Rule(N, rhs14, 0.2);
-        Token[] rhs15 = {roads}; rules[14] = new Rule(N, rhs15, 0.1);
-        Token[] rhs16 = {people}; rules[15] = new Rule(V, rhs16, 0.1);
-        Token[] rhs17 = {fish}; rules[16] = new Rule(V, rhs17, 0.6);
-        Token[] rhs18 = {tanks}; rules[17] = new Rule(V, rhs18, 0.3);
-        Token[] rhs19 = {with}; rules[18] = new Rule(V, rhs19, 1.0);
-        
-        PCFG grammar = new PCFG();
-        for(Rule rule : rules) {
-            grammar.addRule(rule);
-        }
-        
-        List<Token> tokenizedString = new ArrayList<>();
-        Token[] string = {fish, people, fish, tanks};
-        tokenizedString.addAll(Arrays.asList(string));
-        
-        ParseTree res = SentenceParser.CKY(grammar, tokenizedString);
-        ParseTree.display(res, "");
     }
 
     private static ParseTree buildTree(
@@ -249,7 +188,7 @@ public class SentenceParser {
         Pair3<Integer, Integer, Token> pointer = new Pair3<>(begin, end, requirement);
         System.out.println("building tree for token " + requirement + " at " + begin + " " + end);
         Rule rule = score.get(pointer);
-        
+        System.out.println("rule: " + rule);
         Pair<Integer,Integer>[] childs = back.get(pointer);
         res.setRoot(rule.getLHS());
         if(childs == null) {
@@ -269,5 +208,71 @@ public class SentenceParser {
         return res;
     }
     
+    
+        /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        // tokens.
+        
+        Token S = new Token("S", false);
+        Token VP = new Token("VP", false);
+        Token atVP_V = new Token("@VP_V", false);
+        Token NP = new Token("NP", false);
+        Token P = new Token("P", false);
+        Token PP = new Token("PP", false);
+        Token N = new Token("N", false);
+        Token V = new Token("V", false);
+        Token people = new Token("people", true);
+        Token fish = new Token("fish", true);
+        Token tanks = new Token("tanks", true);
+        Token roads = new Token("roads", true);
+        Token with = new Token("with", true);
+        
+        /*
+        // rules.
+        Rule[] rules = new Rule[19];
+        Token[] rhs1 = {NP, VP}; rules[0] = new Rule(S, rhs1, 0.9);
+        Token[] rhs2 = {VP}; rules[1] = new Rule(S, rhs2, 0.1);
+        Token[] rhs3 = {V, NP}; rules[2] = new Rule(VP, rhs3, 0.5);
+        Token[] rhs4 = {V}; rules[3] = new Rule(VP, rhs4, 0.1);
+        Token[] rhs5 = {V, atVP_V}; rules[4] = new Rule(VP, rhs5, 0.3);
+        Token[] rhs6 = {V, PP}; rules[5] = new Rule(VP, rhs6, 0.1);
+        Token[] rhs7 = {NP, PP}; rules[6] = new Rule(atVP_V, rhs7, 1.0);
+        Token[] rhs8 = {NP, NP}; rules[7] = new Rule(NP, rhs8, 0.1);
+        Token[] rhs9 = {NP, PP}; rules[8] = new Rule(NP, rhs9, 0.2);
+        Token[] rhs10 = {N}; rules[9] = new Rule(NP, rhs10, 0.7);
+        Token[] rhs11 = {P, NP}; rules[10] = new Rule(PP, rhs11, 1.0);
+        Token[] rhs12 = {people}; rules[11] = new Rule(N, rhs12, 0.5);
+        Token[] rhs13 = {fish}; rules[12] = new Rule(N, rhs13, 0.2);
+        Token[] rhs14 = {tanks}; rules[13] = new Rule(N, rhs14, 0.2);
+        Token[] rhs15 = {roads}; rules[14] = new Rule(N, rhs15, 0.1);
+        Token[] rhs16 = {people}; rules[15] = new Rule(V, rhs16, 0.1);
+        Token[] rhs17 = {fish}; rules[16] = new Rule(V, rhs17, 0.6);
+        Token[] rhs18 = {tanks}; rules[17] = new Rule(V, rhs18, 0.3);
+        Token[] rhs19 = {with}; rules[18] = new Rule(V, rhs19, 1.0);
+        
+        PCFG grammar = new PCFG();
+        for(Rule rule : rules) {
+            grammar.addRule(rule);
+        }
+        /**/
+        Scanner stdin = new Scanner(System.in);
+        System.out.print("please input grammar file name. ");
+        String grammarFilename = stdin.nextLine();
+        FileInputStream source = new FileInputStream(grammarFilename.trim());
+        PCFG grammar = PCFG.readFrom(source);
+        /**/
+        grammar.display();
+        System.out.print("please input your sentence. all words begin with lowercase letters. seperated with space.\n");
+        String[] prevTokens = stdin.nextLine().trim().split(" ");
+        List<Token> tokenizedString = new ArrayList<>();
+        for(String token : prevTokens) {
+            tokenizedString.add(new Token(token, Token.isTerminal(token)));
+        }
+        
+        ParseTree res = SentenceParser.CKY(grammar, tokenizedString);
+        ParseTree.display(res, "");
+    }
     
 }

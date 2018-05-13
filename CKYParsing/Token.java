@@ -13,6 +13,12 @@ public class Token {
         return token0.toString().contentEquals(token1.toString())
                 && token0.isTerminal() == token1.isTerminal();
     }
+    static boolean isTerminal(String str) {
+        return !(
+                str.charAt(0) == '@'
+                || (str.charAt(0) >= 'A' && str.charAt(0) <= 'Z')
+        );
+    }
     private final boolean isTerminal;
     private final String name;
     public Token(String name, boolean isTerminal) {
