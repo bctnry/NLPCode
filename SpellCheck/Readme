@@ -1,0 +1,173 @@
+
+* 小组介绍
+
+「不会取名字」组
+
+小组成员：
++ 何浩然 20151002388
++ 余晓航 20141002573
++ 林泽天 20151002365
+
+* 工作原理
+
+** 检查错误和修改提示
+
+判断单词是否存在拼写错误依赖于词典文件。若单词不在词典中，则认为存在拼写错误。
+
+对于出现拼写错误的单词，计算其与词典中单词的编辑距离，并选择若干个距离最短的单词作为提示词。
+
+
+** 词典来源
+词典文件为LibreOffice用于实现拼写检查的词典文件：
+        https://github.com/LibreOffice/dictionaries/blob/master/en/en_US.dic
+
+** <<rules>>变化规则
+单词后面附带变化规则标注。同时，附带的文件 =en_US.aff= 说明了不同标注的可以接受的变化。对这些变化的具体说明：
+        https://github.com/LibreOffice/dictionaries/blob/master/en/affDescription.txt
+
+** 规范化
+
+=en_US.aff= 文件中的变形，按照[[rules]]的描述，有四种：
+1. 对于字符'（半角单引号），-（半角横线）和_（半角下划线），尝试用TRY后所接的字符列表中的字符进行替代。
+2. 对于序数词，采用特殊的判断手段。
+3. 对于词语，同时考虑这些词语的可能的变化（前缀，后缀）形式。
+4. 考虑特定字符串之间的相较更为紧密的联系，并在计算编辑距离时适当为这些字符串设定更大的权（.aff文件中REP一节）
+
+本程序实现第2和第3种：
+
++ 本程序会对序数词作特殊处理：程序将会使用特别设定的规则判断这些数字是否正确/错误，不会将其与词典进行匹配。
++ 对词典文件进行预处理，生成包含了原单词以及从原单词变形（添加前缀/后缀）而来的单词的、对于程序实现而言更为方便的词典文件。
+
+同时对于输入：
+
++ 本程序忽略标点符号（半角单引号除外）。被标点符号分隔的多段由字母组成的字符串将会被看做多个单词，如 =state-of-the-art= 将会被看做 =state= ，
+  =of= ， =the= 和 =art= 四个单词。
+
+** 词典的预处理
+
+对原词典文件（ =en_US.dic= ）作如下预处理：
+1. 原文件开头有词典的行数和数词。去除这一部分。
+2. 剩下的部分使用[[preproc-algo]]一节中描述的算法进行预处理。
+最终得到文件 =dict.txt= 。
+
+** <<dist-calc>>编辑距离计算
+
+采用Damerau-Levenshtein距离。
+
+对于字符串\(a_{0}, a_{1}, \dots, a_{n}\)和\(b_{0}, b_{1}, \dots, b_{m}\)的编辑距离，采用如下公式计算：
+
+\(dist(i, j) = \begin{cases}
+dist(i-1, j-1) & \quad a_{i} = b_{j} \\
+max \left(\begin{array} dist(i-1, j) + cost\_add \\dist(i, j-1) + cost\_delete \\ dist(i-1,j-1) + cost\_subst \\
+dist(i-2, j-2) + cost\_trans \end{array}\right) & \quad i,j > 1 \land a_{i-1} = b_{j} \land a_{i} = b_{j-1} \\
+max \left(\begin{array} dist(i-1, j) + cost\_add \\dist(i, j-1) + cost\_delete\\
+dist(i-1, j-1) + cost\_subst\end{array}\right) & \quad otherwise \\
+\end{cases}\)
+
+其中：
++ \(i \in [0, n], j \in [0, m]\)
++ \(cost\_transposition\)代表「将两个相邻的字符互换位置」这一操作的耗费。
++ \(cost\_add = cost\_delete = cost\_subst = cost\_trans = 1\)
+
+
+
+* 算法描述
+
+** <<preproc-algo>>词典预处理算法
+
+词典的预处理对应代码中 =Preprocess= 类。
+1. 将所有变形规则分为四类：可以（与后缀）合并使用的前缀P0、可以（与前缀）合并使用的后缀S0、不可合并使用的前缀P1及不可合并使用的后缀S1。注：每一个规则都有唯一的标识符。
+2. 假设对单词word进行预处理。假设描述其可出现的变形的字符串为T。那么：
+   1. 对于所有同时出现在T和P0的t1和同时出现在T和S0的t2，为word生成t + word + t2。
+   2. 对于所有出现在T和P0（或P1）的t，为word生成t + word。
+   3. 对于所有出现在T和S0（或S1）的t，为word生成word + t。
+   4. 保留word（即不加任何前缀/后缀）。
+
+
+** 编辑距离计算
+
+由[[dist-calc]]一节中的公式可以简单地使用动态规划得到复杂度为\(O(nm)\)的算法。详见代码中 =SpellCheck.levenshteinDistance()= 方法。
+
+
+* 使用方法
+
+** 代码中调用
+
+调用方法如下所示：
+#+BEGIN_EXAMPLE
+    SpellCheck sc = new SpellCheck();
+    sc.initDictionary("your_dictionary.txt");
+    sc.nearestStrings("your_checked_string", OPTION_COUNT); // -> List<String>
+    // 或者一次性检查一段文本。需要将文本封装为一个InputStream：
+    sc.check(your_input).forEach((correction) -> {
+        // correction.getRow(); - 拼写错误所在行
+        // correction.getCol(); - 拼写错误所在列
+        // correction.getCorrectionList(); - 修改建议
+    }    
+#+END_EXAMPLE
+
+** 命令行下使用
+
+可执行文件位于dist文件夹下。使用命令：
+
+#+BEGIN_EXAMPLE
+    java -jar "SpellCheck.jar" [dict_file] <input_file
+#+END_EXAMPLE
+
+其中 =input_file= 为输入文件名。
+
+在默认状态（命令行执行，不带任何参数）下，程序从标准输入读取待检查的文本，向标准输出输出相同的文本，并向标准错误输出拼写错误信息。
+
+** 修改建议个数
+
+当程序附带 =-[n]= 参数时，显示n个编辑距离最小的在词典中的单词。这一参数是可选的。
+
+例如：
+
+#+BEGIN_EXAMPLE
+    java -jar "SpellCheck.jar" dict.txt <input_file
+#+END_EXAMPLE
+
+将会默认显示10个候选词。而：
+
+#+BEGIN_EXAMPLE
+    java -jar "SpellCheck.jar" dict.txt - <input_file
+#+END_EXAMPLE
+
+也会显示10个候选词，而：
+
+#+BEGIN_EXAMPLE
+    java -jar "SpellCheck.jar" dict.txt -5 <input_file
+#+END_EXAMPLE
+
+则会显示5个。
+
+** 例子
+
+以下例子摘选自尼采的著作《查拉图斯特拉如是说》的英译版：
+
+#+BEGIN_EXAMPLE
+Therefore must I descend into the deep: as thou doest in the
+evening, when thou goest behind the sea, and givest light also to the
+nether-world, thou exuberant star!
+#+END_EXAMPLE
+
+使用如下命令运行程序：
+
+#+BEGIN_EXAMPLE
+java -jar "SpellCheck.jar" [词典文件的文件名] -7
+#+END_EXAMPLE
+
+这将为每一个拼写错误输出7个候选词。输入上面的选段后，程序会将这一选段输出一遍，并在最后输出如下的信息：
+
+#+BEGIN_EXAMPLE
+1 49 does dost moist foes idlest durst digest
+2 20 goes guest moist foes coyest oust egoist
+2 46 gives livest divest digest gyves ripest gist
+#+END_EXAMPLE
+
+表示：
++ 第1行第49列开头的单词（ =doest= ）出现拼写错误，建议修改为 =does= ， =dost= ， =moist= 等。
++ 第2行第20列开头的单词（ =goest= ）出现拼写错误，建议修改为 =goes= ， =guest= ， =moist= 等。
++ 第2行第46列开头的单词（ =givest= ）出现拼写错误，建议修改为 =gives= ， =livest= ， =divest= 等。
+

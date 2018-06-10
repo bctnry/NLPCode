@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-06-08 五 22:52 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7018d72">1. 小组介绍</a></li>
+<li><a href="#org0c721d2">2. 工作原理</a>
+<ul>
+<li><a href="#org08ec59b">2.1. 词典来源</a></li>
+<li><a href="#org300869a">2.2. 变化规则</a></li>
+<li><a href="#org13a6d83">2.3. 规范化</a></li>
+<li><a href="#org43f95b3">2.4. 词典的预处理</a></li>
+<li><a href="#org5dfc669">2.5. 编辑距离计算</a></li>
+</ul>
+</li>
+<li><a href="#orge2122c1">3. 算法描述</a>
+<ul>
+<li><a href="#org41ad30c">3.1. 词典预处理算法</a></li>
+<li><a href="#org3057893">3.2. 编辑距离计算</a></li>
+</ul>
+</li>
+<li><a href="#org46f4964">4. 使用方法</a>
+<ul>
+<li><a href="#orgf6d0a44">4.1. 代码中调用</a></li>
+<li><a href="#org2f38098">4.2. 命令行下使用</a></li>
+<li><a href="#org1626f21">4.3. 修改建议个数</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7018d72" class="outline-2">
+<h2 id="org7018d72"><span class="section-number-2">1</span> 小组介绍</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+「不会取名字」组
+</p>
+
+<p>
+小组成员：
+</p>
+<ul class="org-ul">
+<li>何浩然 20151002388</li>
+<li>余晓航 20141002573</li>
+<li>林泽天 20151002365</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0c721d2" class="outline-2">
+<h2 id="org0c721d2"><span class="section-number-2">2</span> 工作原理</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org08ec59b" class="outline-3">
+<h3 id="org08ec59b"><span class="section-number-3">2.1</span> 词典来源</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+词典文件为LibreOffice用于实现拼写检查的词典文件：
+        <a href="https://github.com/LibreOffice/dictionaries/blob/master/en/en_US.dic">https://github.com/LibreOffice/dictionaries/blob/master/en/en_US.dic</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org300869a" class="outline-3">
+<h3 id="org300869a"><span class="section-number-3">2.2</span> <a id="orgc232bf2"></a>变化规则</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+单词后面附带变化规则标注。同时，附带的文件 <code>en_US.aff</code> 说明了不同标注的可以接受的变化。对这些变化的具体说明：
+        <a href="https://github.com/LibreOffice/dictionaries/blob/master/en/affDescription.txt">https://github.com/LibreOffice/dictionaries/blob/master/en/affDescription.txt</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org13a6d83" class="outline-3">
+<h3 id="org13a6d83"><span class="section-number-3">2.3</span> 规范化</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+<code>en_US.aff</code> 文件中的变形，按照<a href="#orgc232bf2">2.2</a>的描述，有四种：
+</p>
+<ol class="org-ol">
+<li>对于字符'（半角单引号），-（半角横线）和_（半角下划线），尝试用TRY后所接的字符列表中的字符进行替代。</li>
+<li>对于序数词，采用特殊的判断手段。</li>
+<li>对于词语，同时考虑这些词语的可能的变化（前缀，后缀）形式。</li>
+<li>考虑特定字符串之间的相较更为紧密的联系，并在计算编辑距离时适当为这些字符串设定更大的权（.aff文件中REP一节）</li>
+</ol>
+
+<p>
+本程序实现第2和第3种：
+</p>
+
+<ul class="org-ul">
+<li>本程序会对序数词作特殊处理：程序将会使用特别设定的规则判断这些数字是否正确/错误，不会将其与词典进行匹配。</li>
+<li>对词典文件进行预处理，生成包含了原单词以及从原单词变形（添加前缀/后缀）而来的单词的、对于程序实现而言更为方便的词典文件。</li>
+</ul>
+
+<p>
+同时对于输入：
+</p>
+
+<ul class="org-ul">
+<li>本程序忽略标点符号（半角单引号除外）。被标点符号分隔的多段由字母组成的字符串将会被看做多个单词，如 <code>state-of-the-art</code> 将会被看做 <code>state</code> ，
+<code>of</code> ， <code>the</code> 和 <code>art</code> 四个单词。</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org43f95b3" class="outline-3">
+<h3 id="org43f95b3"><span class="section-number-3">2.4</span> 词典的预处理</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+对原词典文件（ <code>en_US.dic</code> ）作如下预处理：
+</p>
+<ol class="org-ol">
+<li>原文件开头有词典的行数和数词。去除这一部分。</li>
+<li>剩下的部分使用<a href="#org9cceb46">3.1</a>一节中描述的算法进行预处理。</li>
+</ol>
+<p>
+最终得到文件 <code>dict.txt</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5dfc669" class="outline-3">
+<h3 id="org5dfc669"><span class="section-number-3">2.5</span> <a id="orgc6ed15d"></a>编辑距离计算</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+采用Damerau-Levenshtein距离。
+</p>
+
+<p>
+对于字符串\(a_{0}, a_{1}, \dots, a_{n}\)和\(b_{0}, b_{1}, \dots, b_{m}\)的编辑距离，采用如下公式计算：
+</p>
+
+<p>
+\(dist(i, j) = \begin{cases}
+dist(i-1, j-1) & \quad a_{i} = b_{j} \\
+max \left(\begin{array} dist(i-1, j) + cost\_add \\dist(i, j-1) + cost\_delete \\ dist(i-1,j-1) + cost\_subst \\
+dist(i-2, j-2) + cost\_trans \end{array}\right) & \quad i,j > 1 \land a_{i-1} = b_{j} \land a_{i} = b_{j-1} \\
+max \left(\begin{array} dist(i-1, j) + cost\_add \\dist(i, j-1) + cost\_delete\\
+dist(i-1, j-1) + cost\_subst\end{array}\right) & \quad otherwise \\
+\end{cases}\)
+</p>
+
+<p>
+其中：
+</p>
+<ul class="org-ul">
+<li>\(i \in [0, n], j \in [0, m]\)</li>
+<li>\(cost\_transposition\)代表「将两个相邻的字符互换位置」这一操作的耗费。</li>
+<li>\(cost\_add = cost\_delete = cost\_subst = cost\_trans = 1\)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orge2122c1" class="outline-2">
+<h2 id="orge2122c1"><span class="section-number-2">3</span> 算法描述</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org41ad30c" class="outline-3">
+<h3 id="org41ad30c"><span class="section-number-3">3.1</span> <a id="org9cceb46"></a>词典预处理算法</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+词典的预处理对应代码中 <code>Preprocess</code> 类。
+</p>
+<ol class="org-ol">
+<li>将所有变形规则分为四类：可以（与后缀）合并使用的前缀P0、可以（与前缀）合并使用的后缀S0、不可合并使用的前缀P1及不可合并使用的后缀S1。注：每一个规则都有唯一的标识符。</li>
+<li>假设对单词word进行预处理。假设描述其可出现的变形的字符串为T。那么：
+<ol class="org-ol">
+<li>对于所有同时出现在T和P0的t1和同时出现在T和S0的t2，为word生成t + word + t2。</li>
+<li>对于所有出现在T和P0（或P1）的t，为word生成t + word。</li>
+<li>对于所有出现在T和S0（或S1）的t，为word生成word + t。</li>
+<li>保留word（即不加任何前缀/后缀）。</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org3057893" class="outline-3">
+<h3 id="org3057893"><span class="section-number-3">3.2</span> 编辑距离计算</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+由<a href="#orgc6ed15d">2.5</a>一节中的公式可以简单地使用动态规划得到复杂度为\(O(nm)\)的算法。详见代码中 <code>SpellCheck.levenshteinDistance()</code> 方法。
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org46f4964" class="outline-2">
+<h2 id="org46f4964"><span class="section-number-2">4</span> 使用方法</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgf6d0a44" class="outline-3">
+<h3 id="orgf6d0a44"><span class="section-number-3">4.1</span> 代码中调用</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+调用方法如下所示：
+</p>
+<pre class="example">
+SpellCheck sc = new SpellCheck();
+sc.initDictionary("your_dictionary.txt");
+sc.nearestStrings("your_checked_string", OPTION_COUNT); // -&gt; List&lt;String&gt;
+// 或者一次性检查一段文本。需要将文本封装为一个InputStream：
+sc.check(your_input).forEach((correction) -&gt; {
+    // correction.getRow(); - 拼写错误所在行
+    // correction.getCol(); - 拼写错误所在列
+    // correction.getCorrectionList(); - 修改建议
+}    
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2f38098" class="outline-3">
+<h3 id="org2f38098"><span class="section-number-3">4.2</span> 命令行下使用</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+可执行文件位于dist文件夹下。使用命令：
+</p>
+
+<pre class="example">
+java -jar "SpellCheck.jar" [dict_file] &lt;input_file
+</pre>
+
+<p>
+其中 <code>input_file</code> 为输入文件名。
+</p>
+
+<p>
+在默认状态（命令行执行，不带任何参数）下，程序从标准输入读取待检查的文本，向标准输出输出相同的文本，并向标准错误输出拼写错误信息。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1626f21" class="outline-3">
+<h3 id="org1626f21"><span class="section-number-3">4.3</span> 修改建议个数</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+当程序附带 <code>-[n]</code> 参数时，显示n个编辑距离最小的在词典中的单词。这一参数是可选的。
+</p>
+
+<p>
+例如：
+</p>
+
+<pre class="example">
+java -jar "SpellCheck.jar" dict.txt &lt;input_file
+</pre>
+
+<p>
+将会默认显示10个候选词。而：
+</p>
+
+<pre class="example">
+java -jar "SpellCheck.jar" dict.txt - &lt;input_file
+</pre>
+
+<p>
+也会显示10个候选词，而：
+</p>
+
+<pre class="example">
+java -jar "SpellCheck.jar" dict.txt -5 &lt;input_file
+</pre>
+
+<p>
+则会显示5个。
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2018-06-08 五 22:52</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
